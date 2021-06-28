@@ -20,7 +20,7 @@ const comment = new Schema(
     downvotes: {
       type: Number,
       default: 0,
-    }
+    },
   },
   { timestamps: true }
 );

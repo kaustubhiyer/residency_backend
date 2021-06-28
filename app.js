@@ -1,22 +1,28 @@
 // Package Imports
-const express = require('express');
-const cors = require('cors');
-const dotenv = require('dotenv');
-const mongoose = require('mongoose')
+const express = require("express");
+const cors = require("cors");
+const dotenv = require("dotenv");
+const mongoose = require("mongoose");
 
 // Import Routes/Middleware
 
-
 // Setup
 dotenv.config();
-const app = express()
+const app = express();
 
 // Initialize request object to meet requirements
 app.use(express.json());
 app.use(cors());
 
 // Route setup
+// -  Auth
+app.use("/auth");
 
+// -  Admin
+app.use("/admin");
+
+// -  Feed
+app.use("/");
 
 // Error Handling
 app.use((err, req, res, next) => {
@@ -30,10 +36,12 @@ app.use((err, req, res, next) => {
   });
 });
 
-
 // Listen for requests
-mongoose.connect(process.env.MONGO_URI).then(() => {
-  app.listen(process.env.PORT);
-}).catch((err) => {
-  console.log(err);
-})
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    app.listen(process.env.PORT);
+  })
+  .catch((err) => {
+    console.log(err);
+  });

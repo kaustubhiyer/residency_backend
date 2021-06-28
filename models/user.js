@@ -21,7 +21,7 @@ const user = new Schema(
     organization: {
       type: Schema.Types.ObjectId,
       required: true,
-      rel: "Organization"
+      rel: "Organization",
     },
     bio: {
       type: String,

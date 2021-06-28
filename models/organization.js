@@ -14,7 +14,7 @@ const org = new Schema(
       {
         type: Schema.Types.ObjectId,
         rel: "Post",
-      }
+      },
     ],
   },
   { timestamps: true }
