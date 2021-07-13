@@ -5,6 +5,7 @@ const dotenv = require("dotenv");
 const mongoose = require("mongoose");
 
 // Import Routes/Middleware
+const authRoutes = require("./routes/auth");
 
 // Setup
 dotenv.config();
@@ -16,13 +17,13 @@ app.use(cors());
 
 // Route setup
 // -  Auth
-app.use("/auth");
+app.use("/auth", authRoutes);
 
 // -  Admin
-app.use("/admin");
+// app.use("/admin");
 
 // -  Feed
-app.use("/");
+// app.use("/");
 
 // Error Handling
 app.use((err, req, res, next) => {

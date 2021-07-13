@@ -29,8 +29,8 @@
 ## Routes
 
 - Auth
-  - Login
-  - Signup
+  - Login (POST): Takes in `'email'` and `'password'` in body. If they are valid, an object with a token and expiresIn property are returned. Every authenticated request after should have the token in the Authorization Header of its request.
+  - Signup (PUT): Takes in `'first_name'`, `'last_name'`, `'email'` and `'password'` in body. If valid, returns userId of created user.
   - Reset
   - Verify
   - updateUser
