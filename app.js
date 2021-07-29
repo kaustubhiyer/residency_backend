@@ -23,7 +23,7 @@ app.use("/auth", authRoutes);
 // app.use("/admin");
 
 // -  Feed
-// app.use("/");
+app.use("/");
 
 // Error Handling
 app.use((err, req, res, next) => {
