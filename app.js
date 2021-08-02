@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 
 // Import Routes/Middleware
 const authRoutes = require("./routes/auth");
+const feedRoutes = require("./routes/feed");
 
 // Setup
 dotenv.config();
@@ -23,7 +24,7 @@ app.use("/auth", authRoutes);
 // app.use("/admin");
 
 // -  Feed
-app.use("/");
+app.use("/", feedRoutes);
 
 // Error Handling
 app.use((err, req, res, next) => {

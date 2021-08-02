@@ -5,6 +5,8 @@ const Organization = require("../models/organization");
 
 exports.getPosts = async (req, res, next) => {
   // Get query params if given
+  const page = req.query.page;
+  const perPage = req.query.perPage;
   // TODO: Add fetching of top comment for every post
   try {
     // Add options to customize return:
@@ -14,13 +16,21 @@ exports.getPosts = async (req, res, next) => {
       user.organization
     ).populate("feed");
 
-    // Add filters and pagination here
-    const posts = organization.feed();
+    // filters / pagination / sorting here
+    const posts = organization.feed.slice((page - 1) * perPage, page * perPage);
+
+    const comments = [];
+    // Fetch the top 1 comment for each post fetches by upvotes for now
+    posts.forEach((post) => {
+      const top_comment = Comment.find({ post: post }).sort({ upvotes: -1 });
+      comments.push(top_comment);
+    });
 
     // Return resulting list of posts as is
     return res.status(200).json({
       message: "Posts fetched",
       posts,
+      comments,
     });
   } catch (err) {
     if (!err.status) {
@@ -176,4 +186,4 @@ exports.deletePost = async (req, res, next) => {
   }
 };
 
-// TODO: Add routes to add comment, edit comment, add upvote/downvote, etc.
+// TODO: Add routes to add comment, add replies to comments, edit comment, add upvote/downvote, etc.

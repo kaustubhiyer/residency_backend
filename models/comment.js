@@ -3,8 +3,8 @@ const { Schema, model } = require("mongoose");
 const comment = new Schema(
   {
     author: {
-      type: String,
-      required: true,
+      type: Schema.Types.ObjectId,
+      ref: "User",
     },
     content: {
       type: String,
@@ -25,6 +25,12 @@ const comment = new Schema(
       type: Schema.Types.ObjectId,
       ref: "Post",
     },
+    replies: [
+      {
+        type: Schema.Types.ObjectId,
+        ref: "Comment",
+      },
+    ],
   },
   { timestamps: true }
 );
